@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-company',
@@ -17,7 +17,7 @@ export class CompanyComponent implements OnInit {
     {departmentName:"QA" ,empName: [ "Maitri","Vaishnavi","Sushmita","Sadik","Sreenivas" ]}
  ];
  list: any[];
-
+ value: any ='hello';
   constructor() {
    }
 
@@ -31,6 +31,15 @@ export class CompanyComponent implements OnInit {
     //   this.list.push(data.empName);
     //   console.log(this.list);
     // });
+    if (event.previousContainer !== event.container) {
+      transferArrayItem(event.previousContainer.data,event.container.data,
+      event.previousIndex, event.currentIndex)
+      } else {
     moveItemInArray(list, event.previousIndex, event.currentIndex);
+      }
      }
+
+    click() {
+      console.log("hello");
+    }
 }

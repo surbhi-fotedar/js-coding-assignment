@@ -5,13 +5,16 @@
       <div>
         <span *ngFor="let data of dataSource">
         <td  class="border">
-        <div class="bg-info text-white">
+        <div class="bg-info text-white ">
             {{ data.departmentName }}
         </div>
-        <div cdkDropList (cdkDropListDropped)="drop($event,data.empName)" class="employee-list pt-1">  
+        <div cdkDropList [cdkDropListData]="data.empName"
+         #firstList="cdkDropList" (cdkDropListDropped)="drop($event,data.empName)" class="employee-list">  
         <div *ngFor="let emp of data.empName" class="employee-box" cdkDrag>
-            {{ emp }}
-          </div>
+            <span [innerHtml]="emp" click="edit()">
+              
+            </span><input [(ngModel)]="value">
+        </div>
         </div>
         </td>
         </span>
