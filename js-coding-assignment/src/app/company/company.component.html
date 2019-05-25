@@ -1,0 +1,37 @@
+<mat-card>
+  <mat-card-title class="text-center">Records</mat-card-title>
+  <table class="table text-center">
+    <tbody>
+      <div>
+        <span *ngFor="let data of dataSource">
+        <td  class="border">
+        <div class="bg-info text-white">
+            {{ data.departmentName }}
+        </div>
+        <div cdkDropList (cdkDropListDropped)="drop($event,data.empName)" class="employee-list pt-1">  
+        <div *ngFor="let emp of data.empName" class="employee-box" cdkDrag>
+            {{ emp }}
+          </div>
+        </div>
+        </td>
+        </span>
+      </div>
+    </tbody>
+    <!-- <thead>
+      <tr>
+        <th scope="col">Departments</th>
+        <th scope="col" colspan="5">Employees</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataSource">
+        <td class="font-weight-bolder">{{ data.departmentName }}</td>
+        <div cdkDropList (cdkDropListDropped)="drop($event,data.empName)">
+        <td *ngFor="let emp of data.empName" class="pop" cdkDrag>
+          {{ emp }}
+        </td>
+        </div>
+      </tr>
+    </tbody> -->
+  </table>
+</mat-card>
