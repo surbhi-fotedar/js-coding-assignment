@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-company',
@@ -11,9 +10,7 @@ export class CompanyComponent implements OnInit {
 
   dataSource: any = [];
   connectedTo: any = [];
-  list: any[];
   value: any = " ";
-  
 
   constructor() {
     this.dataSource = [
@@ -30,9 +27,7 @@ export class CompanyComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log(this.dataSource);
-  }
+  ngOnInit() { }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -45,22 +40,37 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  edit(event) {
-    let employeeParent = event.currentTarget.parentNode;
-    const spanChild = employeeParent.firstChild;
+  editEName(event): void {
+    let spanChild = event.currentTarget.parentNode.firstChild;
 
     spanChild.classList.add('active');
     spanChild.nextSibling.classList.add('active');
     this.value = event.target.innerText;
   }
 
-  save(event) {
-    let employeeParent = event.currentTarget.parentNode;
-    const spanChild = employeeParent.firstChild;
-    
-    console.log(event.currentTarget.value);
+  saveEName(event, deptName, emplName): void {
+
+    let spanChild = event.currentTarget.parentNode.firstChild;
+
     spanChild.innerText = event.currentTarget.value;
     spanChild.classList.remove('active');
     event.currentTarget.classList.remove('active');
+
+    this.updateData(deptName, emplName, event.currentTarget.value);
+  }
+
+  // Update the actual data in Order to drag the updated value in different department
+
+  updateData(deptName, emplName, updatedValue): void {
+
+    this.dataSource.forEach((data) => {
+      if (data.departmentName === deptName) {
+        data.empName.forEach((name) => {
+          if (name === emplName) {
+            data.empName[data.empName.indexOf(emplName)] = updatedValue;
+          }
+        });
+      }
+    });
   }
 }

@@ -8,39 +8,14 @@
           <div cdkDropList id="{{ data.departmentName }}" [cdkDropListData]="data.empName"
             [cdkDropListConnectedTo]="connectedTo" class="employee-list" (cdkDropListDropped)="drop($event)">
             <div class="employee-box" *ngFor="let employee of data.empName" cdkDrag>
-              <!-- <div class="employee-wrap"> -->
-                <span #employeeEdit class="employee" (dblclick)="edit($event)" matTooltip="Double tap to edit">
+    
+              <span class="employee" (dblclick)="editEName($event)" matTooltip="Double tap to edit">
                     {{ employee }}
-                </span>
-              <input class="employee-edit" [(ngModel)]="value" (blur)="save($event)"/>
-              <!-- </div> -->
+              </span>
+              <input class="employee-edit" [(ngModel)]="value" (blur)="saveEName($event,data.departmentName,employee)">
             </div>
           </div>
         </div>
     </div>
   </div>
 </div>
-
-<!--  Tabular Implementation
-  <mat-card>
-  <mat-card-title class="text-center">Records</mat-card-title>
-  <table class="table text-center">
-    <tbody>
-      <div>
-        <span *ngFor="let data of dataSource">
-        <td  class="border">
-        <div class="bg-info text-white ">
-            {{ data.departmentName }}
-        </div>
-        <div cdkDropList id="{{ data.departmentName }}" [cdkDropListData]="data.empName" [cdkDropListConnectedTo]="connectedTo"
-         (cdkDropListDropped)="drop($event)" class="employee-list">  
-        <div *ngFor="let emp of data.empName" class="employee-box" cdkDrag>
-          {{ emp }}
-         </div>
-        </div>
-        </td>
-        </span>
-      </div>
-    </tbody>
-  </table>
-</mat-card> -->

@@ -15,23 +15,19 @@
   border-radius: 5px;
 }
 
-.employee-wrap {
+.employee-box .employee {
   cursor: pointer;
 }
 
-.employee {
-  cursor: pointer;
-}
-
-.employee-edit {
+.employee-box .employee-edit {
   display: none;
 }
 
-.employee.active {
+.employee-box .employee.active {
   display: none;
 }
 
-.employee-edit.active {
+.employee-box .employee-edit.active {
   display: inline-block;
   width: 100%;
 }
