@@ -7,7 +7,14 @@
     
           <div cdkDropList id="{{ data.departmentName }}" [cdkDropListData]="data.empName"
             [cdkDropListConnectedTo]="connectedTo" class="employee-list" (cdkDropListDropped)="drop($event)">
-            <div class="employee-box" *ngFor="let employee of data.empName" cdkDrag>{{ employee }}</div>
+            <div class="employee-box" *ngFor="let employee of data.empName" cdkDrag>
+              <!-- <div class="employee-wrap"> -->
+                <span #employeeEdit class="employee" (dblclick)="edit($event)" matTooltip="Double tap to edit">
+                    {{ employee }}
+                </span>
+              <input class="employee-edit" [(ngModel)]="value" (blur)="save($event)"/>
+              <!-- </div> -->
+            </div>
           </div>
         </div>
     </div>

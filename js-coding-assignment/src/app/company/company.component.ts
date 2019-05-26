@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-company',
@@ -11,7 +12,9 @@ export class CompanyComponent implements OnInit {
   dataSource: any = [];
   connectedTo: any = [];
   list: any[];
-  value: any;
+  value: any = " ";
+  
+
   constructor() {
     this.dataSource = [
       { departmentName: "Frontend", empName: ["Rohini", "Mohini", "Sarojini", "Bala", "Venkat"] },
@@ -42,7 +45,22 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  click() {
-    console.log("hello");
+  edit(event) {
+    let employeeParent = event.currentTarget.parentNode;
+    const spanChild = employeeParent.firstChild;
+
+    spanChild.classList.add('active');
+    spanChild.nextSibling.classList.add('active');
+    this.value = event.target.innerText;
+  }
+
+  save(event) {
+    let employeeParent = event.currentTarget.parentNode;
+    const spanChild = employeeParent.firstChild;
+    
+    console.log(event.currentTarget.value);
+    spanChild.innerText = event.currentTarget.value;
+    spanChild.classList.remove('active');
+    event.currentTarget.classList.remove('active');
   }
 }
