@@ -1,4 +1,21 @@
-<mat-card>
+<div class="container">
+  <mat-card-title class="d-flex justify-content-center pb-2">Records</mat-card-title>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let data of dataSource">
+        <div class="drag-container">
+          <div class="section-heading">{{ data.departmentName }} Department</div>
+    
+          <div cdkDropList id="{{ data.departmentName }}" [cdkDropListData]="data.empName"
+            [cdkDropListConnectedTo]="connectedTo" class="employee-list" (cdkDropListDropped)="drop($event)">
+            <div class="employee-box" *ngFor="let employee of data.empName" cdkDrag>{{ employee }}</div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!--  Tabular Implementation
+  <mat-card>
   <mat-card-title class="text-center">Records</mat-card-title>
   <table class="table text-center">
     <tbody>
@@ -8,33 +25,15 @@
         <div class="bg-info text-white ">
             {{ data.departmentName }}
         </div>
-        <div cdkDropList [cdkDropListData]="data.empName"
-         #firstList="cdkDropList" (cdkDropListDropped)="drop($event,data.empName)" class="employee-list">  
+        <div cdkDropList id="{{ data.departmentName }}" [cdkDropListData]="data.empName" [cdkDropListConnectedTo]="connectedTo"
+         (cdkDropListDropped)="drop($event)" class="employee-list">  
         <div *ngFor="let emp of data.empName" class="employee-box" cdkDrag>
-            <span [innerHtml]="emp" click="edit()">
-              
-            </span><input [(ngModel)]="value">
-        </div>
+          {{ emp }}
+         </div>
         </div>
         </td>
         </span>
       </div>
     </tbody>
-    <!-- <thead>
-      <tr>
-        <th scope="col">Departments</th>
-        <th scope="col" colspan="5">Employees</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of dataSource">
-        <td class="font-weight-bolder">{{ data.departmentName }}</td>
-        <div cdkDropList (cdkDropListDropped)="drop($event,data.empName)">
-        <td *ngFor="let emp of data.empName" class="pop" cdkDrag>
-          {{ emp }}
-        </td>
-        </div>
-      </tr>
-    </tbody> -->
   </table>
-</mat-card>
+</mat-card> -->
